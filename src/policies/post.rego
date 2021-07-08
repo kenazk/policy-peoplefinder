@@ -1,19 +1,17 @@
-package peoplefinder.POST.api.users
+package peoplefinder.POST.api.users.__id
 
 default allowed = false
-default visible = false
-default enabled = false
+default visible = true
+default enabled = true
 
 allowed {
-    props = input.user.attributes.properties
-    props.department == "Operations"
-    props.title == "IT Manager"
+    input.user.attributes.properties.department == "Operations"
 }
 
-visible {
-	allowed
+allowed {
+   dir.is_manager_of(input.user.id, input.resource.id)
 }
 
 enabled {
-	allowed
+    allowed
 }
